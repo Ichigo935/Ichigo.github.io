@@ -1,86 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ichigo's Site!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      background:
-        linear-gradient(rgba(27, 27, 29, 0.8), rgba(27, 27, 29, 0.8)),
-        url('1374683.png') no-repeat center center fixed;
-      background-size: cover;
-      margin: 0;
-      padding: 0;
-      font-family: "Space Grotesk", serif;
-      color: white;
-      text-align: center;
-    }
-    h1 {
-      font-family: "Space Grotesk", serif;
-      padding-top: 200px;
-      text-shadow: 2px 2px 7px rgb(0, 0, 0);
-      font-weight: 500;
-    }
-    .link-container {
-      margin-top: 50px;
-      width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      overflow: hidden;
-    }
-    .link-container img {
-      width: 100%;
-      display: block;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
-    }
-    .link-container img:hover {
-      transform: scale(1.05);
-    }
-    /* Hide video initially */
-    #myVideo {
-      display: none;
-      width: 500px;
-      margin: 50px auto;
-      border-radius: 8px;
-      outline: none;
-    }
-  </style>
-</head>
-<body>
-  <h1>for why Isagi's the GOAT click the image</h1>
-  <div class="link-container">
-    <img id="thumbnail" src="d38c10467051374559604ae4baddb2f7.jpg" alt="Isagi Image" />
-  </div>
+<style>
+  #videoWrapper {
+    display: none;
+    width: 500px;
+    margin: 50px auto;
+    border-radius: 8px;
+    outline: none;
+  }
+  #myVideo {
+    width: 100%;
+    border-radius: 8px;
+  }
+</style>
 
-  <video id="myVideo" preload="none">
-    <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+<div id="videoWrapper">
+  <video id="myVideo" preload="none" playsinline></video>
+</div>
 
-  <script>
-    const video = document.getElementById('myVideo');
-    const thumbnail = document.getElementById('thumbnail');
+<script>
+  const video = document.getElementById('myVideo');
+  const wrapper = document.getElementById('videoWrapper');
+  const thumbnail = document.getElementById('thumbnail');
 
-    thumbnail.addEventListener('click', () => {
-      thumbnail.style.display = 'none';
-      video.style.display = 'block';
+  thumbnail.addEventListener('click', () => {
+    thumbnail.style.display = 'none';
+    wrapper.style.display = 'block';
 
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-      }
+    // Set source and play
+    video.src = 'C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4';
+    video.play();
 
-      video.play();
-    });
-  </script>
-</body>
-</html>
+    // Fullscreen the wrapper div instead of video tag
+    if (wrapper.requestFullscreen) {
+      wrapper.requestFullscreen();
+    } else if (wrapper.webkitRequestFullscreen) {
+      wrapper.webkitRequestFullscreen();
+    } else if (wrapper.msRequestFullscreen) {
+      wrapper.msRequestFullscreen();
+    }
+  });
+</script>
