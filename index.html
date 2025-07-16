@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ichigo's Site!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: rgb(27, 27, 29);
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      padding-top: 200px;
+      text-shadow: 2px 2px 7px rgb(0, 0, 0);
+      font-weight: 500;
+    }
+    .link-container {
+      margin-top: 50px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+    .link-container img {
+      width: 100%;
+      display: block;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .link-container img:hover {
+      transform: scale(1.05);
+    }
+    .video-container {
+      margin: 50px auto;
+      width: 500px;
+    }
+    video {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>for why Isagi's the GOAT click the image</h1>
+  <div class="link-container">
+    <a href="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" target="_blank" rel="noopener noreferrer">
+      <img src="d38c10467051374559604ae4baddb2f7.jpg" alt="Isagi Image" />
+    </a>
+  </div>
+
+  <div class="video-container">
+    <video id="myVideo" controls preload="none">
+      <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script>
+    const video = document.getElementById('myVideo');
+
+    video.addEventListener('click', () => {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { // Safari
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // IE11
+        video.msRequestFullscreen();
+      }
+      video.play();
+    });
+  </script>
+</body>
+</html>
