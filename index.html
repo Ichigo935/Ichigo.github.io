@@ -38,14 +38,12 @@
     .link-container img:hover {
       transform: scale(1.05);
     }
-    .video-container {
-      margin: 50px auto;
+    /* Hide video initially */
+    #myVideo {
+      display: none;
       width: 500px;
-    }
-    video {
-      width: 100%;
+      margin: 50px auto;
       border-radius: 8px;
-      cursor: pointer;
       outline: none;
     }
   </style>
@@ -53,22 +51,26 @@
 <body>
   <h1>for why Isagi's the GOAT click the image</h1>
   <div class="link-container">
-    <a href="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" target="_blank" rel="noopener noreferrer">
-      <img src="d38c10467051374559604ae4baddb2f7.jpg" alt="Isagi Image" />
-    </a>
+    <img id="thumbnail" src="d38c10467051374559604ae4baddb2f7.jpg" alt="Isagi Image" />
   </div>
 
-  <div class="video-container">
-    <video id="myVideo" controls preload="none">
-      <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </div>
+  <video id="myVideo" controls preload="none">
+    <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
   <script>
     const video = document.getElementById('myVideo');
+    const thumbnail = document.getElementById('thumbnail');
 
-    video.addEventListener('click', () => {
+    thumbnail.addEventListener('click', () => {
+      // Hide the image
+      thumbnail.style.display = 'none';
+
+      // Show video
+      video.style.display = 'block';
+
+      // Request fullscreen
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if (video.webkitRequestFullscreen) { // Safari
@@ -76,6 +78,8 @@
       } else if (video.msRequestFullscreen) { // IE11
         video.msRequestFullscreen();
       }
+
+      // Play video
       video.play();
     });
   </script>
