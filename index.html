@@ -47,6 +47,7 @@
       margin: 50px auto;
       border-radius: 8px;
       outline: none;
+      object-fit: contain;
     }
     /* Fake fullscreen style */
     #myVideo.fullscreen-fake {
@@ -58,7 +59,7 @@
       z-index: 9999;
       border-radius: 0;
       background: black;
-      object-fit: contain;
+      object-fit: cover; /* fill and crop edges */
     }
   </style>
 </head>
