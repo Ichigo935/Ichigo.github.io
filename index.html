@@ -58,7 +58,7 @@
     <img id="thumbnail" src="d38c10467051374559604ae4baddb2f7.jpg" alt="Isagi Image" />
   </div>
 
-  <video id="myVideo" controls preload="none">
+  <video id="myVideo" preload="none">
     <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
@@ -68,22 +68,17 @@
     const thumbnail = document.getElementById('thumbnail');
 
     thumbnail.addEventListener('click', () => {
-      // Hide the image
       thumbnail.style.display = 'none';
-
-      // Show video
       video.style.display = 'block';
 
-      // Request fullscreen
       if (video.requestFullscreen) {
         video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) { // Safari
+      } else if (video.webkitRequestFullscreen) {
         video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) { // IE11
+      } else if (video.msRequestFullscreen) {
         video.msRequestFullscreen();
       }
 
-      // Play video
       video.play();
     });
   </script>
