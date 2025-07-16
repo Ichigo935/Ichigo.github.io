@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ichigo's Site!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -41,25 +39,51 @@
     .link-container img:hover {
       transform: scale(1.05);
     }
-    #myVideo {
+    #videoContainer {
       display: none;
-      width: 500px;
-      margin: 50px auto;
-      border-radius: 8px;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #videoContainer.fullscreen {
+      display: flex;
+    }
+    #myVideo {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 0;
       outline: none;
       object-fit: contain;
-    }
-    /* Fake fullscreen style */
-    #myVideo.fullscreen-fake {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw !important;
-      height: 100vh !important;
-      z-index: 9999;
-      border-radius: 0;
       background: black;
-      object-fit: cover; /* fill and crop edges */
+    }
+    /* Custom controls */
+    #controls {
+      margin-top: 10px;
+      color: white;
+      user-select: none;
+    }
+    #controls button {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      margin: 0 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #controls button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    /* Hide Exit fullscreen button */
+    #exitFullscreenBtn {
+      display: none;
     }
   </style>
 </head>
@@ -69,32 +93,53 @@
     <img id="thumbnail" src="d38c10467051374559604ae4baddb2f7.jpg" alt="Isagi Image" />
   </div>
 
-  <video id="myVideo" preload="none" playsinline>
-    <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+  <div id="videoContainer">
+    <video id="myVideo" preload="none" playsinline>
+      <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div id="controls">
+      <button id="playPauseBtn">Pause</button>
+      <button id="exitFullscreenBtn">Exit</button>
+    </div>
+  </div>
 
   <script>
-    const video = document.getElementById('myVideo');
     const thumbnail = document.getElementById('thumbnail');
+    const videoContainer = document.getElementById('videoContainer');
+    const video = document.getElementById('myVideo');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const exitFullscreenBtn = document.getElementById('exitFullscreenBtn');
 
     thumbnail.addEventListener('click', () => {
       thumbnail.style.display = 'none';
-      video.style.display = 'block';
-
-      // Expand video to fill screen (fake fullscreen)
-      video.classList.add('fullscreen-fake');
-
-      // Play video
+      videoContainer.classList.add('fullscreen');
       video.play();
+      playPauseBtn.textContent = 'Pause';
+    });
 
-      // Clicking video exits fake fullscreen, pauses video, returns thumbnail
-      video.addEventListener('click', () => {
+    playPauseBtn.addEventListener('click', () => {
+      if(video.paused){
+        video.play();
+        playPauseBtn.textContent = 'Pause';
+      } else {
         video.pause();
-        video.style.display = 'none';
-        video.classList.remove('fullscreen-fake');
-        thumbnail.style.display = 'block';
-      }, { once: true });
+        playPauseBtn.textContent = 'Play';
+      }
+    });
+
+    exitFullscreenBtn.addEventListener('click', () => {
+      video.pause();
+      video.currentTime = 0;
+      videoContainer.classList.remove('fullscreen');
+      thumbnail.style.display = 'block';
+    });
+
+    // Optional: press ESC to exit fullscreen (you can remove if you want)
+    document.addEventListener('keydown', (e) => {
+      if(e.key === "Escape" && videoContainer.classList.contains('fullscreen')){
+        exitFullscreenBtn.click();
+      }
     });
   </script>
 </body>
