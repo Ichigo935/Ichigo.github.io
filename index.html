@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ichigo's Site!</title>
+
+  <!-- Optional Favicon -->
+  <link rel="icon" href="Isagi tab.jpg" type="image/png" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background:
+        linear-gradient(rgba(27, 27, 29, 0.8), rgba(27, 27, 29, 0.8)),
+        url('1374683.png') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      font-family: 'Space Grotesk', serif;
+      color: white;
+      text-align: center;
+      scroll-behavior: smooth;
+    }
+
+    h1 {
+      padding-top: 200px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', serif;
+      color: white;
+      text-align: center;
+
+      /* Subtle black outline */
+      text-shadow:
+        0 0 2px rgba(0, 0, 0, 0.7),
+        0 0 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .link-container {
+      margin-top: 50px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+
+    .link-container img {
+      width: 100%;
+      display: block;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .link-container img:hover {
+      transform: scale(1.05);
+    }
+
+    #videoContainer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 9999;
+    }
+
+    #myVideo {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      background: black;
+      cursor: default;
+      display: block;
+    }
+
+    #bottomRightButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      z-index: 10000;
+      cursor: pointer;
+    }
+
+    #bottomRightButton img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.6);
+      transition: transform 0.2s ease;
+    }
+
+    #bottomRightButton:hover img {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>for why Isagi's the GOAT click the image</h1>
+
+  <div class="link-container">
+    <img id="thumbnail" src="d38c10467051374559604ae4baddb2f7.jpg" alt="Isagi Image" />
+  </div>
+
+  <div id="videoContainer">
+    <video id="myVideo" preload="none" playsinline>
+      <source src="C7157E7B-7BF6-4DF9-A7A3-5A95AE19876D.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Fixed clickable image linking to another page -->
+  <a href="anotherpage.html" id="bottomRightButton" title="Go to another page">
+    <img src="Secret Ichigo.jpg" alt="Go to another page" />
+  </a>
+
+  <script>
+    const thumbnail = document.getElementById('thumbnail');
+    const videoContainer = document.getElementById('videoContainer');
+    const video = document.getElementById('myVideo');
+
+    thumbnail.addEventListener('click', async () => {
+      thumbnail.style.display = 'none';
+      videoContainer.style.display = 'block';
+      video.play();
+
+      if (videoContainer.requestFullscreen) {
+        await videoContainer.requestFullscreen();
+      } else if (videoContainer.webkitRequestFullscreen) {
+        await videoContainer.webkitRequestFullscreen();
+      } else if (videoContainer.msRequestFullscreen) {
+        await videoContainer.msRequestFullscreen();
+      }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        video.pause();
+        videoContainer.style.display = 'none';
+        thumbnail.style.display = 'block';
+        video.currentTime = 0;
+        video.style.cursor = 'default';
+      }
+    });
+
+    video.addEventListener('play', () => {
+      video.style.cursor = 'none';
+    });
+
+    video.addEventListener('pause', () => {
+      video.style.cursor = 'default';
+    });
+
+    video.addEventListener('ended', () => {
+      video.style.cursor = 'default';
+    });
+  </script>
+</body>
+</html>
